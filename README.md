@@ -15,7 +15,7 @@ o888ooooood8 `Y8bod8P' `Y8bod8P' `Y888""8o o888o o888o     .8'
 
 This example shows how to put [App Service Authentication](https://learn.microsoft.com/azure/app-service/overview-authentication-authorization) (also known as EasyAuth) in front of an App Service app, on [Locally Build](https://locally.build).
 
-The application is a small Python app whose only job is to show what App Service Authentication hands it. App Service signs the user in before a request reaches the app, then passes who they are in the `X-MS-CLIENT-PRINCIPAL*` headers and, with the token store enabled, the tokens it obtained in the `X-MS-TOKEN-AAD-*` headers. The app does no authentication of its own. The source lives in [`app/`](./app) in this repository.
+The application is a small Python app, run on App Service's Python 3.14 stack, whose only job is to show what App Service Authentication hands it. App Service signs the user in before a request reaches the app, then passes who they are in the `X-MS-CLIENT-PRINCIPAL*` headers and, with the token store enabled, the tokens it obtained in the `X-MS-TOKEN-AAD-*` headers. The app does no authentication of its own. The source lives in [`app/`](./app) in this repository.
 
 Sign-in uses a Microsoft Entra app registration, created by this example against Locally's [Directory Emulator](https://locally.build/docs/data-plane-emulators/directory-emulator). App Service Authentication is configured entirely from that registration through `auth_settings_v2`, the same as on Azure: there are no `WEBSITE_AUTH_*` app settings to set by hand.
 
@@ -84,6 +84,7 @@ App Service validates the token and passes the caller's identity to the app, whi
 
 ```json
 {
+  "name": "<the caller's name>",
   "id": "<the caller's object ID>",
   "identityProvider": "aad",
   "claims": {
