@@ -44,7 +44,7 @@ resource "azurerm_linux_web_app" "main" {
     # No startup command: App Service serves the WSGI app in app.py with
     # gunicorn.
     application_stack {
-      python_version = "3.12"
+      python_version = "3.14"
     }
   }
 
